@@ -22,9 +22,14 @@ setup_requires = [
 
 
 setup(
-    name='django-oscar-accounts',
+    name='django-oscar-accounts2',
+    obsoletes=[
+        'django-oscar-accounts'
+    ],
     author="David Winterbottom",
     author_email="david.winterbottom@tangentlabs.co.uk",
+    maintainer="Craig Weber",
+    maintainer_email="crgwbr@gmail.com",
     description="Managed accounts for django-oscar",
     long_description=open('README.rst').read(),
     license='BSD',
@@ -35,8 +40,8 @@ setup(
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: 1.7',
-        'Framework :: Django :: 1.8',
+        'Framework :: Django :: 1.9',
+        'Framework :: Django :: 1.10',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: Unix',
