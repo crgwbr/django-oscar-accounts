@@ -23,9 +23,6 @@ setup_requires = [
 
 setup(
     name='django-oscar-accounts2',
-    obsoletes=[
-        'django-oscar-accounts'
-    ],
     author="David Winterbottom",
     author_email="david.winterbottom@tangentlabs.co.uk",
     maintainer="Craig Weber",
