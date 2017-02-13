@@ -21,25 +21,25 @@ system.
 This package uses `double-entry bookkeeping`_ where every transaction is
 recorded twice (once for the source and once for the destination).  This
 ensures the books always balance and there is full audit trail of all
-transactional activity.  
+transactional activity.
 
 If your project manages money, you should be using a library like this.  Your
 finance people will thank you.
 
 
-.. image:: https://travis-ci.org/django-oscar/django-oscar-accounts.svg?branch=master
-    :target: https://travis-ci.org/django-oscar/django-oscar-accounts
+.. image:: https://travis-ci.org/crgwbr/django-oscar-accounts2.svg?branch=master
+    :target: https://travis-ci.org/crgwbr/django-oscar-accounts2
 
-.. image:: http://codecov.io/github/django-oscar/django-oscar-accounts/coverage.svg?branch=master
+.. image:: http://codecov.io/github/crgwbr/django-oscar-accounts2/coverage.svg?branch=master
     :alt: Coverage
-    :target: http://codecov.io/github/django-oscar/django-oscar-accounts?branch=master
+    :target: http://codecov.io/github/crgwbr/django-oscar-accounts2?branch=master
 
-.. image:: https://requires.io/github/django-oscar/django-oscar-accounts/requirements.svg?branch=master
-     :target: https://requires.io/github/django-oscar/django-oscar-accounts/requirements/?branch=master
+.. image:: https://requires.io/github/crgwbr/django-oscar-accounts2/requirements.svg?branch=master
+     :target: https://requires.io/github/crgwbr/django-oscar-accounts2/requirements/?branch=master
      :alt: Requirements Status
 
-.. image:: https://img.shields.io/pypi/v/django-oscar-accounts.svg
-    :target: https://pypi.python.org/pypi/django-oscar-accounts/
+.. image:: https://img.shields.io/pypi/v/django-oscar-accounts2.svg
+    :target: https://pypi.python.org/pypi/django-oscar-accounts2/
 
 
 .. _double-entry bookkeeping: http://en.wikipedia.org/wiki/Double-entry_bookkeeping_system
@@ -71,21 +71,21 @@ Features
 Screenshots
 -----------
 
-.. image:: https://github.com/tangentlabs/django-oscar-accounts/raw/master/screenshots/dashboard-accounts.thumb.png
+.. image:: https://github.com/crgwbr/django-oscar-accounts2/raw/master/screenshots/dashboard-accounts.thumb.png
     :alt: Dashboard account list
-    :target: https://github.com/tangentlabs/django-oscar-accounts/raw/master/screenshots/dashboard-accounts.png
+    :target: https://github.com/crgwbr/django-oscar-accounts2/raw/master/screenshots/dashboard-accounts.png
 
-.. image:: https://github.com/tangentlabs/django-oscar-accounts/raw/master/screenshots/dashboard-form.thumb.png
+.. image:: https://github.com/crgwbr/django-oscar-accounts2/raw/master/screenshots/dashboard-form.thumb.png
     :alt: Create new account
-    :target: https://github.com/tangentlabs/django-oscar-accounts/raw/master/screenshots/dashboard-form.png
+    :target: https://github.com/crgwbr/django-oscar-accounts2/raw/master/screenshots/dashboard-form.png
 
-.. image:: https://github.com/tangentlabs/django-oscar-accounts/raw/master/screenshots/dashboard-transfers.thumb.png
+.. image:: https://github.com/crgwbr/django-oscar-accounts2/raw/master/screenshots/dashboard-transfers.thumb.png
     :alt: Dashboard transfer list
-    :target: https://github.com/tangentlabs/django-oscar-accounts/raw/master/screenshots/dashboard-transfers.png
+    :target: https://github.com/crgwbr/django-oscar-accounts2/raw/master/screenshots/dashboard-transfers.png
 
-.. image:: https://github.com/tangentlabs/django-oscar-accounts/raw/master/screenshots/dashboard-detail.thumb.png
+.. image:: https://github.com/crgwbr/django-oscar-accounts2/raw/master/screenshots/dashboard-detail.thumb.png
     :alt: Dashboard account detail
-    :target: https://github.com/tangentlabs/django-oscar-accounts/raw/master/screenshots/dashboard-detail.png
+    :target: https://github.com/crgwbr/django-oscar-accounts2/raw/master/screenshots/dashboard-detail.png
 
 
 Installation
@@ -95,7 +95,7 @@ Install using pip:
 
 .. code-block:: bash
 
-	pip install django-oscar-accounts
+	pip install django-oscar-accounts2
 
 and add `oscar_accounts` to `INSTALLED_APPS`.  Runnning ``manage.py migrate
 oscar_accounts`` will create the appropriate database tables. To create initial
@@ -212,14 +212,14 @@ Reverse transfers:
 
 .. code-block:: python
 
-    facade.reverse(trans, user=staff_member, 
+    facade.reverse(trans, user=staff_member,
                    description="Just an example")
 
 If the proposed transfer is invalid, an exception will be raised.  All
 exceptions are subclasses of `oscar_accounts.exceptions.AccountException`.
 Your client code should look for exceptions of this type and handle them
 appropriately.
- 
+
 Client code should only use the `oscar_accounts.models.Budget` class and the
 two functions from `oscar_accounts.facade` - nothing else should be required.
 
@@ -307,8 +307,8 @@ encapsulate your business logic and error handling.  Here's an example:
                 for transfer in completed_transfers:
                     facade.reverse(transfer)
             except Exception, reverse_exc:
-                # Uh oh: No man's land.  We could be left with a partial 
-                # redemption. This will require an admin to intervene.  Make 
+                # Uh oh: No man's land.  We could be left with a partial
+                # redemption. This will require an admin to intervene.  Make
                 # sure your logger mails admins on error.
                 logger.error("Order %s, transfers failed (%s) and reverse failed (%s)",
                              order_number, transfer_exc, reverse_exc)
@@ -350,14 +350,14 @@ Core accounts and account types
 
 A post-syncdb signal will create the common structure for account types and
 accounts.  Some names can be controlled with settings, as indicated in
-parentheses. 
+parentheses.
 
 - **Assets**
 
   - **Sales**
 
     - Redemptions (`ACCOUNTS_REDEMPTIONS_NAME`) - where money is
-      transferred to when an account is used to pay for something.  
+      transferred to when an account is used to pay for something.
     - Lapsed (`ACCOUNTS_LAPSED_NAME`) - where money is transferred to
       when an account expires.  This is done by the
       'close_expired_accounts' management command.  The name of this
@@ -387,13 +387,13 @@ Example transactions
 Consider the following accounts and account types:
 
 - **Assets**
-    - **Sales** 
-        - Redemptions 
+    - **Sales**
+        - Redemptions
         - Lapsed
     - **Cash**
-        - Bank 
+        - Bank
     - **Unpaid**
-        - Merchant funded 
+        - Merchant funded
 - **Liabilities**
     - **Deferred income**
 
@@ -439,5 +439,5 @@ Fork repo, set-up virtualenv and run::
     make install
 
 Run tests with::
-    
+
     ./runtests.py
